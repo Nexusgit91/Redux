@@ -1,11 +1,26 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { items } from "../data/item";
+const url = "https://course-api.com/react-useReducer-cart-project";
+export const getCartItems = createAsyncThunk(
+  "cart/getCartItems",
+  async (name, thunkAPI) => {
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      return data;
+    } catch (err) {
+      return thunkAPI.rejectWithValue("SOMETHING WENT WRONG");
+    }
+  }
+);
 
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
     items: items,
     total: 0,
+    status: "idle",
+    error: null,
   },
   reducers: {
     addItem(state, action) {
@@ -45,6 +60,23 @@ const cartSlice = createSlice({
     clearCart(state) {
       state.items = [];
       state.total = 0;
+    },
+  },
+  extraReducers: {
+    //pending,fulfilled,rejected all the basic fxn
+    [getCartItems.pending]: (state) => {
+      state.status = "loading";
+    },
+    [getCartItems.fulfilled]: (state, action) => {
+      state.status = "succeeded";
+      state.items = action.payload;
+      console.log(action);
+
+      state.total = action.payload.total;
+    },
+    [getCartItems.rejected]: (state, action) => {
+      state.status = "failed";
+      state.error = action.error.message;
     },
   },
 });

@@ -66,13 +66,13 @@ const CartContainer = () => {
         </thead>
         <tbody>
           {items.map((item) => (
-            <tr key={item.id}>
+            <tr key={item.id} className="zoom-effect">
               <td className="image-column">
                 <Image
                   src={item.image}
                   alt={item.name}
                   thumbnail
-                  style={{ width: "200px", width: "200px" }}
+                  style={{ width: "200px", height: "200px" }}
                 />
               </td>
               <td>{item.name}</td>
