@@ -5,17 +5,17 @@ import "./nav.css";
 
 const Navbar = () => {
   const cartItems = useSelector((state) => state.cart.items);
-  //calculate the totla no of items in the cart
+  //calculate the total no of items in the cart
   const cartQuantity = cartItems.reduce(
     (accumulator, item) => accumulator + item.quantity,
     0
   );
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <div className="container-fluid">
         <a className="navbar-brand" href="/">
-          My Store
+          REDUX
         </a>
         <button
           className="navbar-toggler"
@@ -40,6 +40,38 @@ const Navbar = () => {
                 Products
               </a>
             </li>
+            <li className="nav-item dropdown">
+              <a
+                className="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Dropdown
+              </a>
+              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li>
+                  <a className="dropdown-item" href="#">
+                    Option 1
+                  </a>
+                </li>
+                <li>
+                  <a className="dropdown-item" href="#">
+                    Option 2
+                  </a>
+                </li>
+                <li>
+                  <hr className="dropdown-divider" />
+                </li>
+                <li>
+                  <a className="dropdown-item" href="#">
+                    Option 3
+                  </a>
+                </li>
+              </ul>
+            </li>
           </ul>
           <ul className="navbar-nav">
             <li className="nav-item dropdown">
@@ -51,7 +83,7 @@ const Navbar = () => {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                <FaShoppingCart size={30} />
+                <FaShoppingCart size={40} />
 
                 <span className="cart-quantity">{cartQuantity}</span>
               </a>

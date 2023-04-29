@@ -53,7 +53,7 @@ const CartContainer = () => {
         Are you sure you want to clear the cart?
       </ConfirmationModal>
 
-      <Table bordered hover responsive>
+      <Table hover responsive>
         <thead>
           <tr>
             <th>Image</th>
@@ -67,12 +67,12 @@ const CartContainer = () => {
         <tbody>
           {items.map((item) => (
             <tr key={item.id}>
-              <td>
+              <td className="image-column">
                 <Image
                   src={item.image}
                   alt={item.name}
                   thumbnail
-                  style={{ width: "200px", heigth: "200px" }}
+                  style={{ width: "200px", width: "200px" }}
                 />
               </td>
               <td>{item.name}</td>
@@ -84,7 +84,7 @@ const CartContainer = () => {
                 >
                   -
                 </Button>
-                {item.quantity}
+                <span className="quantity">{item.quantity}</span>
                 <Button
                   variant="light"
                   onClick={() => handleIncreaseQuantity(item.id)}
@@ -116,12 +116,13 @@ const CartContainer = () => {
                 Clear Cart
               </Button>
             </td>
-            <td>
+            <td className="total-text">
               <strong>Total:</strong>
             </td>
-            <td colSpan="2">
+            <td className="total-amount">
               <strong>${calculateTotal()}</strong>
             </td>
+            <td></td>
           </tr>
         </tfoot>
       </Table>
